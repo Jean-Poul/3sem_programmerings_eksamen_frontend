@@ -12,7 +12,7 @@ const Header = ({ isLoggedIn, loginMsg, isAdmin, loginName }) => {
   return (
     <>
       <Navbar bg="dark" variant="dark" id="header">
-        <Navbar.Brand href="#home">Hold E, Gruppe 8</Navbar.Brand>
+        <Navbar.Brand href="#home">3sem eksamen Jean-Poul</Navbar.Brand>
         <Nav className="mr-auto">
           <NavLink className="nav-link" exact activeClassName="selected" href="/" to="/">
             Home

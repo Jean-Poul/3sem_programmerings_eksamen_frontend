@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { AllUsers, DeleteUser, UpdateUser, GetUser, AddUser } from "./settings";
+import { AllUsers, DeleteUser, UpdateUser, GetUser, AddUser, AllCustomers, GetCustomer, UpdateCustomer, DeleteCustomer } from "./settings";
 import {
   Container,
   Row,
   Col,
   Button,
-  InputGroup,
-  FormControl,
   Table,
   Form
 } from "react-bootstrap";
@@ -14,20 +12,16 @@ import {
 function AdminCrud() {
   const initialValues = {
     email: "",
+    name: "",
     password: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    street: "",
-    city: "",
-    zipcode: ""
+    phone: ""
   };
 
   const [allPerson, setAllPerson] = useState([]);
   const [person, setPerson] = useState(initialValues);
 
   const handleSubmit = (event) => {
-    //   alert('A name was submitted: ' + person.firstName);
+    //   alert('A name was submitted: ' + person.name);
     event.preventDefault();
     updateForm(person);
     console.log("from submit " + person);
@@ -42,7 +36,7 @@ function AdminCrud() {
   };
 
   const fetchPerson = () => {
-    fetch(AllUsers)
+    fetch(AllCustomers)
       .then((res) => res.json())
       .then((data) => {
         setAllPerson(data);
@@ -52,7 +46,7 @@ function AdminCrud() {
   const deletePerson = (email) => {
     const options = makeOptions("DELETE");
 
-    fetch(DeleteUser + email, options)
+    fetch(DeleteCustomer + email, options)
       .then((res) => res.json())
       .then((data) => {
         setAllPerson(data);
@@ -70,7 +64,7 @@ function AdminCrud() {
   const updateForm = (person) => {
     const options = makeOptions("PUT", person);
 
-    fetch(UpdateUser, options)
+    fetch(UpdateCustomer + person.email, options)
       .then((res) => fetchPerson())
       .catch((err) => {
         if (err.status) {
@@ -82,7 +76,7 @@ function AdminCrud() {
   };
 
   const getPerson = (email) => {
-    fetch(GetUser + email)
+    fetch(GetCustomer + email)
       .then((res) => res.json())
       .then((data) => {
         setPerson(data);
@@ -125,30 +119,21 @@ function AdminCrud() {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Name"
+              value={person.name}
+              onChange={handleChange}
+            />
+          </Form.Group>          
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="text"
               placeholder="Password"
               value={person.password}
-              onChange={handleChange}
-            />
-          </Form.Group>          
-          <Form.Group controlId="firstName">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="First name"
-              value={person.firstName}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="lastName">
-            <Form.Label>Last name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Last name"
-              value={person.lastName}
               onChange={handleChange}
             />
           </Form.Group>
@@ -161,36 +146,10 @@ function AdminCrud() {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="street">
-            <Form.Label>Street</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Street"
-              value={person.street}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="city">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="City"
-              value={person.city}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="zipcode">
-            <Form.Label>Zipcode</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Zipcode"
-              value={person.zipcode}
-              onChange={handleChange}
-            />
-          </Form.Group>
+          
 
           <Button variant="primary" type="submit">
-            Submit
+            Update
           </Button>
         </Form>
         <p>{JSON.stringify(person)}</p>
@@ -226,23 +185,21 @@ function AdminCrud() {
     fetchPerson();
   }, []);
 
+  
+
   return (
     <div>
       <Container>
-        <h2>CRUD for users</h2>
+        <h2>CRUD for Hotel</h2>
         <Row className="mt-4">
           <Col>
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>First name</th>
-                  <th>Last name</th>
                   <th>Email</th>
+                  <th>Name</th>
+                  <th>Password</th>
                   <th>Phone</th>
-                  <th>Street</th>
-                  <th>City</th>
-                  <th>Zip</th>
-                  <th>Hobby</th>
                   <th colSpan="2">&nbsp;</th>
                 </tr>
               </thead>
@@ -251,14 +208,10 @@ function AdminCrud() {
                   allPerson.all.map((element) => {
                     return (
                       <tr key={element.email}>
-                        <td>{element.firstName}</td>
-                        <td>{element.lastName}</td>
                         <td>{element.email}</td>
+                        <td>{element.name}</td>
+                        <td>{element.password}</td>
                         <td>{element.phone}</td>
-                        <td>{element.street}</td>
-                        <td>{element.city}</td>
-                        <td>{element.zipcode}</td>
-                        <td>{element.hobbyList.map((el) => el + ", ")}</td>
                         <td>
                           <Button onClick={() => getPerson(element.email)}>
                             Edit
