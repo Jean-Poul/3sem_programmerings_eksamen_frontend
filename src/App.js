@@ -5,6 +5,7 @@ import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import AllJokes from "./AllJokes";
 import AllScrape from "./AllScrape";
 import AdminCrud from "./AdminCRUD";
+import Hotels from "./Hotels";
 import Login from "./Login";
 import { Switch, Route, NavLink, useHistory } from "react-router-dom";
 
@@ -113,7 +114,7 @@ export default function App() {
 function Home() {
   return (
     <div className="pageContent">
-      <h2>Home</h2>
+      <Hotels />
     </div>
   );
 }

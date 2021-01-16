@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { AllCustomers, GetCustomer, UpdateCustomer, DeleteCustomer, AddCustomer } from "./settings";
+import { AllCustomers, GetCustomer, UpdateCustomer, DeleteCustomer, AddCustomer, AllHotels, GetHotel } from "./settings";
 import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Table,
-  Form
-} from "react-bootstrap";
+    Container,
+    Row,
+    Col,
+    Button,
+    Table,
+    Form
+  } from "react-bootstrap";
 
-function AdminCrud() {
-  const initialValues = {
+
+function Hotels() {
+
+    const initialValues = {
+    address: "",
     email: "",
     name: "",
-    password: "",
-    phone: ""
+    phone: "",
+    price: "",
+    url: ""
   };
 
   const [allPerson, setAllPerson] = useState([]);
@@ -36,7 +40,7 @@ function AdminCrud() {
   };
 
   const fetchPerson = () => {
-    fetch(AllCustomers)
+    fetch(AllHotels)
       .then((res) => res.json())
       .then((data) => {
         setAllPerson(data);
@@ -75,8 +79,8 @@ function AdminCrud() {
       });
   };
 
-  const getPerson = (email) => {
-    fetch(GetCustomer + email)
+  const getHotel = (person) => {
+    fetch(GetHotel + person.id)
       .then((res) => res.json())
       .then((data) => {
         setPerson(data);
@@ -105,35 +109,39 @@ function AdminCrud() {
         }
       });
   };
+ 
 
   const userForm = () => {
     return (
       <div>
+          <Button onClick={() => getHotel(person.id)}>
+                            Get hotel
+                          </Button>
         <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email">
+        <Form.Group controlId="address">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Address"
+              value={person.address}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
               placeholder="Email"
-              value={person.email}
+              value={person.Email}
               onChange={handleChange}
             />
-          </Form.Group>
+          </Form.Group>          
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Name"
               value={person.name}
-              onChange={handleChange}
-            />
-          </Form.Group>          
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Password"
-              value={person.password}
               onChange={handleChange}
             />
           </Form.Group>
@@ -146,11 +154,30 @@ function AdminCrud() {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="price">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Price"
+              value={person.price}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="url">
+            <Form.Label>URL</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="URL"
+              value={person.url}
+              onChange={handleChange}
+            />
+          </Form.Group>
           
 
           <Button variant="primary" type="submit">
             Update
           </Button>
+          
         </Form>
         <p>{JSON.stringify(person)}</p>
       </div>
@@ -185,21 +212,23 @@ function AdminCrud() {
     fetchPerson();
   }, []);
 
-  
+
 
   return (
     <div>
       <Container>
-        <h2>CRUD for Hotel</h2>
+        <h2>List of Hotels</h2>
         <Row className="mt-4">
           <Col>
             <Table striped bordered hover>
               <thead>
                 <tr>
+                  <th>Address</th>
                   <th>Email</th>
                   <th>Name</th>
-                  <th>Password</th>
                   <th>Phone</th>
+                  <th>Price</th>
+                  <th>URL</th>
                   <th colSpan="2">&nbsp;</th>
                 </tr>
               </thead>
@@ -207,16 +236,14 @@ function AdminCrud() {
                 {allPerson.all &&
                   allPerson.all.map((element) => {
                     return (
-                      <tr key={element.email}>
+                      <tr key={element.id}>
+                        <td>{element.address}</td>
                         <td>{element.email}</td>
                         <td>{element.name}</td>
-                        <td>{element.password}</td>
                         <td>{element.phone}</td>
-                        <td>
-                          <Button onClick={() => getPerson(element.email)}>
-                            Edit
-                          </Button>
-                        </td>
+                        <td>{element.price}</td>
+                        <td>{element.url}</td>
+                        
                         <td>
                           <Button onClick={() => deletePerson(element.email)}>
                             Delete
@@ -235,6 +262,7 @@ function AdminCrud() {
       </Container>
     </div>
   );
+
 }
 
-export default AdminCrud;
+export default Hotels;
