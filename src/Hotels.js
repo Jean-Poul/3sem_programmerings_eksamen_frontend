@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { AllCustomers, GetCustomer, UpdateCustomer, DeleteCustomer, AddCustomer, AllHotels, GetHotel } from "./settings";
 import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Table,
-    Form
-  } from "react-bootstrap";
-
+  AllCustomers,
+  GetCustomer,
+  UpdateCustomer,
+  DeleteCustomer,
+  AddCustomer,
+  AllHotels,
+  GetHotel
+} from "./settings";
+import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
 
 function Hotels() {
-
-    const initialValues = {
+  const initialValues = {
     address: "",
     email: "",
     name: "",
@@ -79,12 +78,16 @@ function Hotels() {
       });
   };
 
-  const getHotel = (person) => {
-    fetch(GetHotel + person.id)
+  const getHotel = (id) => {
+    fetch(GetHotel + id)
       .then((res) => res.json())
       .then((data) => {
         setPerson(data);
         console.log(data);
+      })
+      .then((data) => {
+        const hotelString = `ID: ${data.id} Name: ${data.name}`;
+        document.getElementById("txt_hotel").innerHTML = hotelString;
       })
       .catch((err) => {
         if (err.status) {
@@ -109,77 +112,27 @@ function Hotels() {
         }
       });
   };
- 
+
+  const showUser = document.getElementById("txt_User");
+  const input = document.getElementById("inp_User").value;
+  document.getElementById("btn_User").onclick = () => {
+    const id = document.getElementById("inp_User").value;
+    fetch(GetHotel + id)
+      .then((res) => res.json())
+      .then((user) => {
+        const userString = `ID: ${user.id} <br /> Address: ${user.address} <br /> Email: ${user.email} <br /> Name: ${user.name} <br /> Phone: ${user.phone} <br /> Price: ${user.price} <br /> URL: ${user.url}`;
+        document.getElementById("txt_User").innerHTML = userString;
+      });
+  };
 
   const userForm = () => {
     return (
       <div>
-          <Button onClick={() => getHotel(person.id)}>
-                            Get hotel
-                          </Button>
-        <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="address">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Address"
-              value={person.address}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Email"
-              value={person.Email}
-              onChange={handleChange}
-            />
-          </Form.Group>          
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Name"
-              value={person.name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="phone">
-            <Form.Label>Phone</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Phone"
-              value={person.phone}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="price">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Price"
-              value={person.price}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="url">
-            <Form.Label>URL</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="URL"
-              value={person.url}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          
-
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
-          
-        </Form>
-        <p>{JSON.stringify(person)}</p>
+          <br />
+        <h5>Search for hotel info: </h5>
+        <input id="inp_User" type="text"></input>
+        <button id="btn_User">Search</button>
+        <p id="txt_User"></p>
       </div>
     );
   };
@@ -212,8 +165,6 @@ function Hotels() {
     fetchPerson();
   }, []);
 
-
-
   return (
     <div>
       <Container>
@@ -229,7 +180,6 @@ function Hotels() {
                   <th>Phone</th>
                   <th>Price</th>
                   <th>URL</th>
-                  <th colSpan="2">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
@@ -237,6 +187,7 @@ function Hotels() {
                   allPerson.all.map((element) => {
                     return (
                       <tr key={element.id}>
+
                         <td>{element.address}</td>
                         <td>{element.email}</td>
                         <td>{element.name}</td>
@@ -244,17 +195,12 @@ function Hotels() {
                         <td>{element.price}</td>
                         <td>{element.url}</td>
                         
-                        <td>
-                          <Button onClick={() => deletePerson(element.email)}>
-                            Delete
-                          </Button>
-                        </td>
                       </tr>
                     );
                   })}
               </tbody>
             </Table>
-            <Button onClick={() => addPerson()}>Add</Button>
+           
           </Col>
         </Row>
 
@@ -262,7 +208,6 @@ function Hotels() {
       </Container>
     </div>
   );
-
 }
 
 export default Hotels;
