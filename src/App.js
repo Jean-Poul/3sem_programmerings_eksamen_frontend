@@ -13,20 +13,20 @@ const Header = ({ isLoggedIn, loginMsg, isAdmin, loginName }) => {
   return (
     <>
       <Navbar bg="dark" variant="dark" id="header">
-        <Navbar.Brand href="#home">3sem eksamen Jean-Poul</Navbar.Brand>
+        <Navbar.Brand href="#home">J-P Hotels</Navbar.Brand>
         <Nav className="mr-auto">
           <NavLink className="nav-link" exact activeClassName="selected" href="/" to="/">
             Home
         </NavLink>
-          <NavLink className="nav-link" activeClassName="selected" to="/jokes">
+          {/* <NavLink className="nav-link" activeClassName="selected" to="/jokes">
             Jokes
-        </NavLink>
+        </NavLink> */}
 
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <NavLink className="nav-link" activeClassName="selected" to="/scrape" href="/scrape">
               Scrape
             </NavLink>
-          )}
+          )} */}
           {isAdmin && (
             <>
               <li>
@@ -85,12 +85,12 @@ export default function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/jokes">
+          {/* <Route path="/jokes">
             <Jokes />
           </Route>
           <Route path="/scrape">
             <Scrape />
-          </Route>
+          </Route> */}
           <Route path="/admin">
             <Admin />
           </Route>
@@ -119,7 +119,7 @@ function Home() {
   );
 }
 
-function Jokes() {
+/* function Jokes() {
   return (
     <div className="pageContent">
       <AllJokes />
@@ -133,7 +133,7 @@ function Scrape() {
       <AllScrape />
     </div>
   );
-}
+} */
 
 function Admin() {
   return (

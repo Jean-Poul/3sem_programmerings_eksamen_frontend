@@ -1,20 +1,31 @@
- export const URL = "http://localhost:8080/3_sem_eksamensprojekt";
-export const URLJokes = "http://localhost:8080/3_sem_eksamensprojekt/api/jokes";
+
+
+/* export const URLJokes = "http://localhost:8080/3_sem_eksamensprojekt/api/jokes";
 export const URLScrapeSequential = "http://localhost:8080/3_sem_eksamensprojekt/api/scrape/sequential";
 export const URLScrapeParallel = "http://localhost:8080/3_sem_eksamensprojekt/api/scrape/parallel";
 export const AllUsers = "http://localhost:8080/3_sem_eksamensprojekt/api/info/person/all";
 export const DeleteUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/delete/";
 export const UpdateUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/person";
 export const GetUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info/person/";
-export const AddUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info"; 
+export const AddUser = "http://localhost:8080/3_sem_eksamensprojekt/api/info";  */ 
 
+/* export const URL = "http://localhost:8080/3_sem_eksamensprojekt";
 export const AllHotels = "http://localhost:8080/3_sem_eksamensprojekt/api/hotel/all"; 
 export const GetHotel = "http://localhost:8080/3_sem_eksamensprojekt/api/hotel/";
 export const AllCustomers = "http://localhost:8080/3_sem_eksamensprojekt/api/customer/all"; 
 export const GetCustomer = "http://localhost:8080/3_sem_eksamensprojekt/api/customer/"; 
 export const UpdateCustomer = "http://localhost:8080/3_sem_eksamensprojekt/api/customer/update/";
 export const DeleteCustomer = "http://localhost:8080/3_sem_eksamensprojekt/api/customer/delete/";
-export const AddCustomer = "http://localhost:8080/3_sem_eksamensprojekt/api/customer";
+export const AddCustomer = "http://localhost:8080/3_sem_eksamensprojekt/api/customer"; */
+
+export const URL = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/";
+export const AllHotels = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/api/hotel/all"; 
+export const GetHotel = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/api/hotel/";
+export const AllCustomers = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/api/customer/all"; 
+export const GetCustomer = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/api/customer/"; 
+export const UpdateCustomer = "https://www.jplm.dk/Programmerings_eksamen_Backend-1/api/customer/update/";
+export const DeleteCustomer = "https://www.jplm.dk/Programmerings_eksamen_Backend-1//api/customer/delete/";
+export const AddCustomer = "https://www.jplm.dk/Programmerings_eksamen_Backend-1//api/customer"; 
 
 
 //http://exam.cphdat.dk:8000/hotel/all

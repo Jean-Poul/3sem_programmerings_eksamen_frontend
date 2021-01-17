@@ -11,19 +11,19 @@ import {
 import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
 
 function Hotels() {
-  const initialValues = {
+ /*  const initialValues = {
     address: "",
     email: "",
     name: "",
     phone: "",
     price: "",
     url: ""
-  };
+  }; */
 
   const [allPerson, setAllPerson] = useState([]);
-  const [person, setPerson] = useState(initialValues);
+ /*  const [person, setPerson] = useState(initialValues); */
 
-  const handleSubmit = (event) => {
+  /* const handleSubmit = (event) => {
     //   alert('A name was submitted: ' + person.name);
     event.preventDefault();
     updateForm(person);
@@ -37,7 +37,7 @@ function Hotels() {
     setPerson({ ...person, [id]: value });
     console.log("from change " + id);
   };
-
+ */
   const fetchPerson = () => {
     fetch(AllHotels)
       .then((res) => res.json())
@@ -46,7 +46,7 @@ function Hotels() {
       });
   };
 
-  const deletePerson = (email) => {
+  /* const deletePerson = (email) => {
     const options = makeOptions("DELETE");
 
     fetch(DeleteCustomer + email, options)
@@ -62,9 +62,9 @@ function Hotels() {
           console.log("Network error");
         }
       });
-  };
+  }; */
 
-  const updateForm = (person) => {
+ /*  const updateForm = (person) => {
     const options = makeOptions("PUT", person);
 
     fetch(UpdateCustomer + person.email, options)
@@ -76,9 +76,9 @@ function Hotels() {
           console.log("Network error" + err);
         }
       });
-  };
+  }; */
 
-  const getHotel = (id) => {
+ /*  const getHotel = (id) => {
     fetch(GetHotel + id)
       .then((res) => res.json())
       .then((data) => {
@@ -96,9 +96,9 @@ function Hotels() {
           console.log("Network error");
         }
       });
-  };
+  }; */
 
-  const addPerson = () => {
+/*   const addPerson = () => {
     const options = makeOptions("POST", person);
 
     fetch(AddCustomer, options)
@@ -111,11 +111,11 @@ function Hotels() {
           console.log("Network error");
         }
       });
-  };
+  }; */
 
-  const showUser = document.getElementById("txt_User");
-  const input = document.getElementById("inp_User").value;
-  document.getElementById("btn_User").onclick = () => {
+/*   const showUser = document.getElementById("txt_User");
+  const input = document.getElementById("inp_User").value; */
+ /*  document.getElementById("btn_User").onclick = () => {
     const id = document.getElementById("inp_User").value;
     fetch(GetHotel + id)
       .then((res) => res.json())
@@ -123,9 +123,9 @@ function Hotels() {
         const userString = `ID: ${user.id} <br /> Address: ${user.address} <br /> Email: ${user.email} <br /> Name: ${user.name} <br /> Phone: ${user.phone} <br /> Price: ${user.price} <br /> URL: ${user.url}`;
         document.getElementById("txt_User").innerHTML = userString;
       });
-  };
+  }; */
 
-  const userForm = () => {
+  /* const userForm = () => {
     return (
       <div>
           <br />
@@ -135,12 +135,12 @@ function Hotels() {
         <p id="txt_User"></p>
       </div>
     );
-  };
+  }; */
 
   /*
   Function for POST, PUT and DELETE
   */
-  function makeOptions(method, body) {
+ /*  function makeOptions(method, body) {
     const opts = {
       method: method,
       headers: {
@@ -152,7 +152,7 @@ function Hotels() {
       opts.body = JSON.stringify(body);
     }
     return opts;
-  }
+  } */
 
   /* function fetchWithErrorCheck(res) {
     if (!res.ok) {
@@ -203,8 +203,12 @@ function Hotels() {
            
           </Col>
         </Row>
-
-        {userForm()}
+        <br />
+        <h5>Search for hotel info: </h5>
+        <input id="inp_User" type="text"></input>
+        <button id="btn_User">Search</button>
+        <p id="txt_User"></p>
+       {/*  {userForm()} */}
       </Container>
     </div>
   );

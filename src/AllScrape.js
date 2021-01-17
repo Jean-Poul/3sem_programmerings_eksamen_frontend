@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react';
 import { URLScrapeSequential, URLScrapeParallel } from './settings';
 import { Table, Container, Row, Col, Button } from "react-bootstrap";
 
@@ -89,4 +89,4 @@ const AllScrape = () => {
 
 }
 
-export default AllScrape;
+export default AllScrape; */
